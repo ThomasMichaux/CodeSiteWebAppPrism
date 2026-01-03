@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Prism - Secure Instant Messaging">
+    <meta name="theme-color" content="#4f46e5">
+    <title>Prism | Secure Messaging</title>
+    
+    <!-- Inline Critical CSS for Loader -->
+    <style>
+        .loader {
+            position: fixed;
+            inset: 0;
+            background: #f0f2f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.3s;
+        }
+        .loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(79, 70, 229, 0.2);
+            border-top-color: #4f46e5;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        @media (prefers-color-scheme: dark) {
+            .loader {
+                background: #0c1317;
+            }
+        }
+    </style>
+    
+    <!-- Link to external CSS -->
+    <link rel="stylesheet" href="../CSS/style.css">
+</head>
+<body>
+    <!-- LOADER -->
+    <div class="loader" id="loader">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- AUTHENTICATION VIEW -->
+    <section id="auth-view" class="auth-container" role="main">
+        <!-- Ambient Background Elements -->
+        <div class="orb orb-1" aria-hidden="true"></div>
+        <div class="orb orb-2" aria-hidden="true"></div>
+
+        <div class="auth-card">
+            <div class="logo-container">
+                <div class="logo-ring" aria-hidden="true"></div>
+                <svg class="icon icon-logo" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+                </svg>
+            </div>
+            
+            <h1 class="brand-title">Welcome to Prism</h1>
+            <p class="brand-tagline">Secure. Fast. Harmonious.</p>
+            
+            <form id="login-form">
+                <div class="input-group">
+                    <label for="email" class="label">Email or Phone</label>
+                    <input type="text" id="email" class="input" placeholder="user@example.com" required autocomplete="username" aria-required="true">
+                </div>
+                <div class="input-group">
+                    <label for="password" class="label">Password</label>
+                    <input type="password" id="password" class="input" placeholder="••••••••" required autocomplete="current-password" aria-required="true">
+                </div>
+                <button type="submit" class="btn btn-primary">Sign In</button>
+            </form>
+            
+            <p class="auth-links">
+                <a href="#">Forgot password?</a> · <a href="#">Create Account</a>
+            </p>
+        </div>
+    </section>
+
+    <!-- MAIN APPLICATION VIEW -->
+    <section id="main-view" class="app-container">
+        
+        <!-- SIDEBAR -->
+        <aside class="sidebar" role="complementary">
+            <header class="sidebar-header">
+                <img src="https://picsum.photos/seed/me/200" alt="My Profile Picture" class="user-profile-thumb">
+                <div class="icon-group">
+                    <button class="btn-icon" title="Status" aria-label="Change status">
+                        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M12 6v6l4 2"></path>
+                        </svg>
+                    </button>
+                    <button class="btn-icon" title="New Chat" aria-label="Start new conversation">
+                        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                        </svg>
+                    </button>
+                    <button class="btn-icon" title="Menu" aria-label="Open menu">
+                        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <line x1="3" y1="12" x2="21" y2="12"></line>
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                            <line x1="3" y1="18" x2="21" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+            </header>
+            
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Search or start new chat" aria-label="Search conversations">
+            </div>
+
+            <nav class="contact-list" id="contact-list" role="list" aria-label="Conversations">
+                <!-- Contacts Injected by JS -->
+            </nav>
+        </aside>
+
+        <!-- CHAT AREA -->
+        <main class="chat-area" role="main">
+            
+            <!-- Empty State -->
+            <div id="empty-state" class="empty-state-bg">
+                <svg width="250" height="250" viewBox="0 0 303 172" fill="none" xmlns="http://www.w3.org/2000/svg" class="empty-illustration" aria-hidden="true">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M229.565 160.229C262.212 149.245 286.931 118.241 283.39 73.4194C278.009 5.31929 210.365 -9.96159 157.765 19.2878C105.165 48.5371 35.7781 29.5794 16.4602 77.4935C-2.85773 125.408 23.6621 178.659 95.3764 171.484C167.091 164.309 196.918 171.214 229.565 160.229Z" fill="#D1D7DB"/>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M131.589 68.9422C131.589 68.9422 138.521 61.248 148.465 67.3675C148.465 67.3675 156.356 60.7796 162.252 68.9422C162.252 68.9422 171.267 73.5658 171.267 86.8682C171.267 86.8682 168.846 111.896 148.465 112.358C128.084 112.819 124.586 86.8682 124.586 86.8682C124.586 86.8682 124.586 76.6365 131.589 68.9422Z" fill="white"/>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M148.458 67.3675C148.458 67.3675 156.349 60.7796 162.245 68.9422C162.245 68.9422 171.26 73.5658 171.26 86.8682C171.26 86.8682 168.839 111.896 148.458 112.358C128.077 112.819 124.579 86.8682 124.579 86.8682C124.579 86.8682 124.579 76.6365 131.582 68.9422C131.582 68.9422 138.514 61.248 148.458 67.3675Z" stroke="#41525D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <h1 class="empty-title">Prism Web</h1>
+                <p class="empty-subtitle">Send and receive messages securely.</p>
+            </div>
+
+            <!-- Active Chat -->
+            <div id="active-chat" class="active-chat-container">
+                <header class="chat-header">
+                    <div class="chat-user-info">
+                        <button class="btn-icon mobile-back-btn" id="back-btn" aria-label="Back to conversations">
+                            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M19 12H5M12 19l-7-7 7-7"/>
+                            </svg>
+                        </button>
+                        <img src="" alt="" class="chat-avatar" id="header-avatar">
+                        <div class="chat-details">
+                            <span class="chat-name" id="header-name">User</span>
+                            <span class="chat-status" id="header-status">online</span>
+                        </div>
+                    </div>
+                    <div class="icon-group">
+                        <button class="btn-icon" aria-label="Search in conversation">
+                            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                            </svg>
+                        </button>
+                        <button class="btn-icon" aria-label="Voice call">
+                            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polygon points="10 8 16 12 10 16 10 8"></polygon>
+                            </svg>
+                        </button>
+                        <button class="btn-icon" aria-label="More options">
+                            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                                <circle cx="12" cy="12" r="1"></circle>
+                                <circle cx="12" cy="5" r="1"></circle>
+                                <circle cx="12" cy="19" r="1"></circle>
+                            </svg>
+                        </button>
+                    </div>
+                </header>
+
+                <div class="messages-wrapper" id="messages-wrapper" role="log" aria-live="polite" aria-atomic="false">
+                    <!-- Messages Injected by JS -->
+                </div>
+
+                <div class="chat-footer">
+                    <button class="btn-icon" aria-label="Attach file">
+                        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path>
+                        </svg>
+                    </button>
+                    
+                    <div class="input-box-wrapper">
+                        <input type="text" class="msg-input" id="msg-input" placeholder="Type a message" aria-label="Message input">
+                    </div>
+
+                    <button class="send-btn" id="send-btn" aria-label="Send message">
+                        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <line x1="22" y1="2" x2="11" y2="13"></line>
+                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </main>
+    </section>
+
+    <!-- Link to external JS -->
+    <script src="../JavaScript/script.js"></script>
+</body>
+</html>
