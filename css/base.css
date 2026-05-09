@@ -1,0 +1,138 @@
+@layer base {
+
+    html {
+        font-size: 16px;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        scrollbar-width: thin;
+        scrollbar-color: var(--color-border) transparent;
+    }
+
+    body {
+        font-family: var(--font-family);
+        font-size: var(--font-size-base);
+        font-weight: var(--font-weight-normal);
+        line-height: var(--line-height-normal);
+        color: var(--color-text-primary);
+        background-color: var(--color-bg-primary);
+        overflow: hidden;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-weight: var(--font-weight-semibold);
+        line-height: var(--line-height-tight);
+        color: var(--color-text-primary);
+    }
+
+    h1 {
+        font-size: var(--font-size-2xl);
+    }
+
+    h2 {
+        font-size: var(--font-size-xl);
+    }
+
+    h3 {
+        font-size: var(--font-size-lg);
+    }
+
+    p {
+        margin-bottom: var(--spacing-4);
+    }
+
+    p:last-child {
+        margin-bottom: 0;
+    }
+
+    a {
+        color: var(--color-primary);
+        transition: color var(--transition-fast);
+    }
+
+    button {
+        font-family: inherit;
+        font-size: inherit;
+        line-height: inherit;
+    }
+
+    input,
+    textarea {
+        font-family: inherit;
+        font-size: inherit;
+        line-height: inherit;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+        color: var(--color-text-muted);
+        opacity: 1;
+    }
+
+    strong,
+    b {
+        font-weight: var(--font-weight-semibold);
+    }
+
+    small {
+        font-size: var(--font-size-sm);
+    }
+
+    svg:not([fill]) {
+        fill: currentColor;
+        flex-shrink: 0;
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    ::selection {
+        background-color: var(--color-primary);
+        color: var(--color-text-inverse);
+    }
+
+    ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: var(--color-border);
+        border-radius: var(--radius-full);
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: var(--color-border-light);
+    }
+
+    [role="button"],
+    button,
+    input,
+    textarea,
+    select {
+        touch-action: manipulation;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+        *,
+        *::before,
+        *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+            scroll-behavior: auto !important;
+        }
+    }
+
+}
